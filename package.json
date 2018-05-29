@@ -1,0 +1,19 @@
+{
+  "name": "05-clima-mundo",
+  "version": "1.0.0",
+  "description": "Aplicación para saber el clima de una ciudad del mundo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingleo/app-clima.git"
+  },
+  "author": "Leonardo Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ingleo/app-clima/issues"
+  },
+  "homepage": "https://github.com/ingleo/app-clima#readme"
+}
