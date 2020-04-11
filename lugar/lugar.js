@@ -15,22 +15,29 @@ const axios = require('axios');
 
 // }
 
-const getLugarLatLng = async(direccion) => {
+const getLugarLatLng = async (direccion) => {
     let encodeUrl = encodeURI(direccion);
 
-    let resp = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${ encodeUrl}&key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx`);
+    const instance = axios.create({
+        baseURL: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${encodeUrl}`,
+        headers: { 'X-RapidAPI-Key': 'f1e1f548bamsh627a22b6590fcd4p10c343jsn964e78ca3a2b' }
+    });
 
-    if (resp.data.status === 'ZERO_RESULTS') {
-        throw new Error(`No hay resultados para la ciudad ${ direccion}`);
+    const response = await instance.get();
+
+    if (response.data.Results.length === 0) {
+        throw new Error(`No hay resultados para ${direccion}`);
     }
 
-    let location = resp.data.results[0];
-    let coords = location.geometry.location;
+    const data = response.data.Results[0];
+    const name = data.name;
+    const latitud = data.lat;
+    const longitud = data.lon;
 
     return {
-        direccion: location.formatted_address,
-        lat: coords.lat,
-        lng: coords.lng
+        direccion: name,
+        lat: latitud,
+        lng: longitud
     }
 }
 
